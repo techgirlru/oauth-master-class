@@ -3,15 +3,17 @@ const authorize = ({
   default_avatar_id: defaultAvatarId,
   display_name: displayName,
 }) => {
-  const avatarHtml = `<div class="avatar" style="background-image:url('https://avatars.mds.yandex.net/get-yapic/\${defaultAvatarId}/islands-middle')"></div>`;
-  const nameHtml = `<div class="name">\${displayName}</div>`;
+  // убрал обратные слеши перед $
+  const avatarHtml = `<div class="avatar" style="background-image:url('https://avatars.mds.yandex.net/get-yapic/${defaultAvatarId}/islands-middle')"></div>`;
+  const nameHtml = `<div class="name">${displayName}</div>`;
 
   document.getElementById("auth").innerHTML = `${avatarHtml}${nameHtml}`;
 };
 
 // Делаем запрос за инфой о пользователе.
 const fetchYandexData = (token) =>
-  fetch(`https://login.yandex.ru/info?format=json&oauth_token=\${token}`).then(
+  // убрал обратный слеш перед $
+  fetch(`https://login.yandex.ru/info?format=json&oauth_token=${token}`).then(
     (res) => res.json()
   );
 
@@ -33,9 +35,8 @@ window.onload = () => {
     })
     .catch((error) => console.log("Что-то пошло не так: ", error));
   };
-};
 
   document.getElementById("button").onclick = () => {
     // TODO button
   };
-};
+};   // <-- была лишняя }; здесь, я её убрал
